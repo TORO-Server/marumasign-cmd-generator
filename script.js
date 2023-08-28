@@ -1,47 +1,65 @@
-function gencmd(){
-    address = document.getElementById("address").value;
-    width = document.getElementById("width").value;
-    height = document.getElementById("width").value;
-    x = document.getElementById("x").value;
-    y = document.getElementById("y").value;
-    z = document.getElementById("z").value;
-    rx = document.getElementById("rx").value;
-    ry = document.getElementById("ry").value;
-    rz= document.getElementById("rz").value;
-    if (height == 0){
-        height = width;
+async function gencmd() {
+
+    let address = document.getElementById("address").value;
+
+    // もし URLを短縮するかどうか のチェックボックスにチェックが入っているたら
+    if (document.getElementById("toShortURL").checked) {
+        json = await get(`https://is.gd/create.php?format=json&url=${encodeURIComponent(address)}`);
+        if (json.shorturl) {
+            address = json.shorturl
+            console.log(`URLを短縮しました: ${address}`)
+        } else {
+            console.error("URLを短縮できませんでした")
+        }
     }
-    if (x == 0){
-        x = 0;
+
+
+    const width = document.getElementById("width").value;
+    const height = document.getElementById("width").value;
+    const x = document.getElementById("x").value;
+    const y = document.getElementById("y").value;
+    const z = document.getElementById("z").value;
+    const rx = document.getElementById("rx").value;
+    const ry = document.getElementById("ry").value;
+    const rz = document.getElementById("rz").value;
+
+
+    const signText = createSignText(address, width, height, x, y, z, rx, ry, rz)
+
+    const command = toCommand(signText);
+
+    document.getElementById(
+        "generate"
+    ).innerHTML = command;
+}
+
+
+function get(url) {// Get リクエスト
+    return new Promise((resolve) => {
+        fetch(url)
+            .then(res => res.json())
+            .then(json => resolve(json))
+            .catch(() => resolve(undefined));
+    });
+}
+
+function createSignText(address, width, height, x, y, z, rx, ry, rz) {
+    const texts = [address, x, y, z, height, width, rx, ry, rz]
+    return texts.join("|")
+}
+
+function toCommand(signText) {
+
+    const maxLength = 15;
+
+    let texts = [];
+    for (let i = 0; i < signText.length; i += maxLength) {
+        texts.push(signText.substr(i, maxLength));
     }
-    if (y == 0){
-        y = 0;
-    }
-    if (z == 0){
-        z = 0;
-    }
-    if (rx == 0){
-        rx = 0;
-    }
-    if (ry == 0){
-        ry = 0;
-    }
-    if (rz == 0){
-        rz = 0;
-    }
-    const text1=address.substr(0,20);
-    const text2=address.substr(20,40);
-    const text3=address.substr(40,60);
-    const text4="|"+x+"|"+y+"|"+z+"|"+width+"|"+height+"|"+rx+"|"+ry+"|"+rz;
-    const dec1 = atob("L2dpdmUgQHAgbWluZWNyYWZ0Om9ha19zaWdue0Jsb2NrRW50aXR5VGFnOntUZXh0MToneyJ0ZXh0Ijoi");
-    const dec2 = atob("In0nLFRleHQyOid7InRleHQiOiI");
-    const dec3 = atob("In0nLFRleHQzOid7InRleHQiOiI");
-    const dec4 = atob("In0nLFRleHQ0Oid7InRleHQiOiI");
-    const dec5 = atob("In0nfSxkaXNwbGF5OntOYW1lOid7InRleHQiOiJHZW5lcmF0ZWQgU2lnbiJ9J319");
-    // [/give @p minecraft:oak_sign{BlockEntityTag:{Text1:'{"text":"]をbase64でエンコード→L2dpdmUgQHAgbWluZWNyYWZ0Om9ha19zaWdue0Jsb2NrRW50aXR5VGFnOntUZXh0MToneyJ0ZXh0Ijoi
-    // ["}',Text2:'{"text":"]→In0nLFRleHQyOid7InRleHQiOiI
-    // ["}',Text3:'{"text":"]→In0nLFRleHQzOid7InRleHQiOiI
-    // ["}',Text4:'{"text":"]→In0nLFRleHQ0Oid7InRleHQiOiI
-    // ["}'},display:{Name:'{"text":"Generated Sign"}'}}]→In0nfSxkaXNwbGF5OntOYW1lOid7InRleHQiOiJHZW5lcmF0ZWQgU2lnbiJ9J319
-    document.getElementById("generate").innerHTML = `${dec1}${text1}${dec2}${text2}${dec3}${text3}${dec4}${text4}${dec5}`
+
+    texts = texts.map(text => `'["${text}"]'`)
+
+    texts = texts.concat(Array(4).fill(`'[""]'`)).slice(0, 4)
+
+    return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`
 }
