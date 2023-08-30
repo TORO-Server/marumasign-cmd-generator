@@ -11,22 +11,9 @@ async function gencmd() {
 
     // もし URLを短縮するかどうか のチェックボックスにチェックが入っているたら
     if (document.getElementById("toShortURL").checked) {
-        // https://is.gd/ の URL短縮APIを利用して 短縮URLを生成
-        json = await get(`https://is.gd/create.php?format=json&url=${encodeURIComponent(address)}`);
-        // 送られてきた json に shorturl があるかどうか チェック
-        if (json.shorturl) {
-            //もし あったら
-            //address を 短縮URLに置き換える
-            address = json.shorturl
-            // ログを送信
-            console.log(`URLを短縮しました: ${address}`)
-        } else {
-            //もし なかったら
-            //エラーのログを送信
-            console.error("URLを短縮できませんでした")
-        }
+        // 短縮URL を取得して address に代入する
+        address = await getShortURL(address);
     }
-
 
     //---------- HTMLから値を取得 ---------- start
     const width = document.getElementById("width").value;

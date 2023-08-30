@@ -13,8 +13,8 @@ function get(url) {
 // アドレス、大きさ、位置、回転 のデータから
 // 看板に書かれる文字を生成して
 // それを return する
-function createSignText(address, width, height, x, y, z, rx, ry, rz) {
-    const texts = [address, x, y, z, height, width, rx, ry, rz]
+function createSignText(url, width, height, x, y, z, rx, ry, rz) {
+    const texts = [url, x, y, z, height, width, rx, ry, rz]
     return texts.join("|")
 }
 
@@ -36,6 +36,38 @@ function toCommand(signText, version) {
         return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`;
     } else {
         texts = texts.map((text, index) => `Text${index + 1}:'["${text}"]'`)
-        return `/give @p minecraft:oak_sign{BlockEntityTag:{${texts}}}}`;
+        return `/give @p minecraft:oak_sign{BlockEntityTag:{${texts}}}`;
+    }
+}
+
+async function getShortURL(url) {
+
+    let shorturl = localStorage.getItem(url);
+
+    // ローカルストレージに短縮したURLがキャッシュされていたら
+    // それを return する
+    if (shorturl) return shorturl
+
+    // https://is.gd/ の URL短縮APIを利用して 短縮URLを生成
+    json = await get(`https://is.gd/create.php?format=json&url=${encodeURIComponent(url)}`);
+    // 送られてきた json に shorturl があるかどうか チェック
+
+    // shorturl の値を置き換える
+    shorturl = json.shorturl
+
+    if (shorturl) {
+        //もし あったら
+
+        // ローカルストレージを利用して 短縮したURLをキャッシュ
+        localStorage.setItem(url, shorturl);
+
+        // ログを送信
+        console.log(`URLを短縮しました: ${url}`);
+        return shorturl
+    } else {
+        //もし なかったら
+        //エラーのログを送信
+        console.error("URLを短縮できませんでした");
+        return url
     }
 }
