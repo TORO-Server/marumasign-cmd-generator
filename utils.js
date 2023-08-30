@@ -35,7 +35,7 @@ function toCommand(signText, version) {
         texts = texts.concat(Array(4).fill(`'[""]'`)).slice(0, 4);
         return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`;
     } else {
-        texts = texts.map((text, index) => `Text${index}:'["${text}"]'`)
-        return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`;
+        texts = texts.map((text, index) => `Text${index + 1}:'["${text}"]'`)
+        return `/give @p minecraft:oak_sign{BlockEntityTag:{${texts}}}}`;
     }
 }
