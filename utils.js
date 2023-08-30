@@ -21,18 +21,21 @@ function createSignText(address, width, height, x, y, z, rx, ry, rz) {
 
 // giveコマンドに変換して
 // それを return する
-function toCommand(signText) {
+function toCommand(signText, version) {
 
     const maxLength = 15;
 
     let texts = [];
-    for (let i = 0; i < signText.length; i += maxLength) {
+    for (let i = 0; i < signText.length; i += maxLength)
         texts.push(signText.substr(i, maxLength));
+
+
+    if (version == "1.20") {
+        texts = texts.map(text => `'["${text}"]'`)
+        texts = texts.concat(Array(4).fill(`'[""]'`)).slice(0, 4);
+        return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`;
+    } else {
+        texts = texts.map((text, index) => `Text${index}:'["${text}"]'`)
+        return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`;
     }
-
-    texts = texts.map(text => `'["${text}"]'`)
-
-    texts = texts.concat(Array(4).fill(`'[""]'`)).slice(0, 4)
-
-    return `/give @p minecraft:oak_sign{BlockEntityTag:{front_text:{messages:[${texts}]}}}`
 }

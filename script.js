@@ -44,7 +44,7 @@ async function gencmd() {
     const signText = createSignText(address, width, height, x, y, z, rx, ry, rz)
 
     // giveコマンドを生成
-    const command = toCommand(signText);
+    const command = toCommand(signText, version);
 
     // HTMLに 生成した give コマンドを表示
     document.getElementById("generate").innerHTML = command;
