@@ -1,10 +1,14 @@
 body{
     font-size: 100%;
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 label{
     display: flex;
+}
+a img{
+    height: 40px;
 }
 
 .box{
@@ -14,35 +18,76 @@ label{
     margin-right: auto;
 }
 
+.box p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    margin: 0;
+    
+}
+
 .title{
     text-align: center;
-    background-color: rgb(34, 48, 243);
-    color: aliceblue;
+    background-color: #002060;
     padding: 0;
     margin: 0;
     font-size: 30px;
+    display: flex;
+    color: white;
+}
+
+.title img{
+    max-width: 30%;
+    min-width: 300px;
+    max-height: 100px;
+    display: block;
+    margin-right: auto;
+}
+.title p{
+    width: 20%;
+    max-height: 100px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .form{
     font-size: 30px;
-    width: 100%;
-    max-width: 248px;
+    width: 40%;
     margin: 5px;
 }
 
 input{
     font-size: 30px;
+    width: 60%;
 }
 
-.req{
-    margin:5px;
+.box input{
     font-size: 30px;
-    background-color: rgb(41, 41, 212);
-    color:white;
-    padding: 5px;
-    border-radius: 10px 10px 10px 10px;
+    width: 60%;
 }
 
 .run{
     text-align: center;
+}
+
+.command{
+    font-size: 30px;
+    width: 90%;
+    margin-top: 20px;
+    text-align: center;
+    overflow-wrap: normal;
+}
+
+textarea{
+    display: block;
+    text-align: center;
+    width: 90%;
+    resize: none;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

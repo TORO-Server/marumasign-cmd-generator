@@ -34,5 +34,5 @@ async function gencmd() {
     const command = toCommand(signText, version);
 
     // HTMLに 生成した give コマンドを表示
-    document.getElementById("generate").innerHTML = command;
+    document.getElementById("generate").value = command;
 }

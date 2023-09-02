@@ -11,58 +11,68 @@
 </head>
 
 <body>
-    <div class="title">
-        <h1>Marumasign コマンドジェネレーター</h1>
+    <div class="title" id="ver">
+        <img src="title.png">
     </div>
     <div class="main">
         <div class="input">
             <div class="box">
                 <label>
                     <p class="form">画像アドレス</p><input type="text" id="address">
-                    <p class="req">必須</p>
+                    <a onclick="urlmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">横幅</p><input type="number" id="width" value="1">
-                    <p class="req">必須</p>
+                    <a onclick="whmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">高さ</p><input type="number" id="height" value="1">
+                    <a onclick="whmsg()"><img src="question.png"></a>
                 </label>
             </div>
             <div class="box">
                 <label>
                     <p class="form">X軸位置</p><input type="number" id="x" value="0">
+                    <a onclick="xyzmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">Y軸位置</p><input type="number" id="y" value="0">
+                    <a onclick="xyzmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">Z軸位置</p><input type="number" id="z" value="0">
+                    <a onclick="xyzmsg()"><img src="question.png"></a>
                 </label>
             </div>
             <div class="box">
                 <label>
                     <p class="form">X軸回転</p><input type="number" id="rx" value="0">
+                    <a onclick="rxyzmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">Y軸回転</p><input type="number" id="ry" value="0">
+                    <a onclick="rxyzmsg()"><img src="question.png"></a>
                 </label>
                 <label>
                     <p class="form">Z軸回転</p><input type="number" id="rz" value="0">
+                    <a onclick="rxyzmsg()"><img src="question.png"></a>
                 </label>
             </div>
             <div class="box">
                 <label>
                     <p class="form">URLを短縮するかどうか</p><input class="form" type="checkbox" id="toShortURL">
+                    <a onclick="shorturlmsg()"><img src="question.png"></a>
                 </label>
             </div>
             <div class="run">
                 <input type="submit" value="ジェネレート！" onclick="gencmd()">
             </div>
-            <div class="command" id="generate">
-            </div>
+            <textarea readonly id="generate"></textarea>
         </div>
     </div>
 </body>
-
+<script>
+    if (version == "1.20"){
+    document.getElementById("ver").insertAdjacentHTML('beforeend','<p>1.20モード</p>');}
+</script>
 </html>
