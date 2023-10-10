@@ -17,7 +17,7 @@ async function gencmd() {
 
     //---------- HTMLから値を取得 ---------- start
     const width = document.getElementById("width").value;
-    const height = document.getElementById("width").value;
+    const height = document.getElementById("height").value;
     const x = document.getElementById("x").value;
     const y = document.getElementById("y").value;
     const z = document.getElementById("z").value;
