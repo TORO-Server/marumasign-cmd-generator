@@ -49,7 +49,7 @@ async function getShortURL(url) {
     if (shorturl) return shorturl
 
     // https://is.gd/ の URL短縮APIを利用して 短縮URLを生成
-    json = await get(`https://is.gd/create.php?format=json&url=${encodeURIComponent(url)}`);
+    json = await get(`https://xgd.io/V1/shorten?url=${encodeURIComponent(url)}&key=8d31d02ef6d26a2aa8582bb3a1b65ed4`);
     // 送られてきた json に shorturl があるかどうか チェック
 
     // shorturl の値を置き換える
@@ -70,4 +70,5 @@ async function getShortURL(url) {
         console.error("URLを短縮できませんでした");
         return url
     }
+
 }
