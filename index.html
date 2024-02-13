@@ -60,8 +60,17 @@
             </div>
             <div class="box">
                 <label>
-                    <p class="form">URLを短縮するかどうか</p><input class="form" type="checkbox" id="toShortURL">
+                    <p class="form">URLを短縮するかどうか</p><input class="form" type="checkbox" id="toShortURL" disabled="disabled">
                     <a onclick="shorturlmsg()"><img src="question.png"></a>
+                </label>
+            </div>
+            <div class="box">
+                <label>
+                    <p class="form">自動コピー</p>
+                    <div class="toggle_button">
+                        <input id="autocopy" class="toggle_input" type='checkbox' checked="checked">
+                        <label for="toggle" class="toggle_label">
+                    </div>
                 </label>
             </div>
             <div class="run">
@@ -72,7 +81,7 @@
     </div>
 </body>
 <script>
-    if (version == "1.20"){
-    document.getElementById("ver").insertAdjacentHTML('beforeend','<p>1.20モード</p>');}
+    if (version == "1.19"){
+    document.getElementById("ver").insertAdjacentHTML('beforeend','<p>1.19までモード</p>');}
 </script>
 </html>
