@@ -37,7 +37,14 @@ async function gencmd() {
     document.getElementById("generate").value = command;
 
     //自動コピー
-    if(document.getElementById("autocopy").checked){
+    if (document.getElementById("autocopy").checked) {
         navigator.clipboard.writeText(command);
+    }
+}
+
+// html の body が読み込まれたら実行される関数
+function load() {
+    if (version == "1.19") {
+        document.getElementById("ver").insertAdjacentHTML('beforeend', '<p>1.19までモード</p>');
     }
 }
