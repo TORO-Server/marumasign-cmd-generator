@@ -26,7 +26,7 @@ function toCommand(signText, version) {
     for (let i = 0; i < signText.length; i += maxLength)
         texts.push(signText.substr(i, maxLength));
 
-    if (version == "1.20") {
+    if (version == "1.20" || version == null) {
         texts = texts.map((text) => `'["${text}"]'`);
         if (texts.length <= 4) {
             let front_texts = texts.concat(Array(4).fill(`'[""]'`)).slice(0, 4);
