@@ -65,7 +65,7 @@ async function getShortURL(url) {
         localStorage.setItem(url, shorturl);
 
         // ログを送信
-        console.log(`URLを短縮しました: ${url}`);
+        console.log(`URLを短縮しました: ${url} -> ${shorturl}`);
         return shorturl;
     } else {
         //もし なかったら
