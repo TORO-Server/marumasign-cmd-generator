@@ -1,3 +1,3 @@
-# marumasign-cmd-generator
+# MarumaSign Command Generator
 
 FabricのMarumaSignの画像を表示する看板のコマンドを生成するジェネレーター
