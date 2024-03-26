@@ -12,13 +12,17 @@
 
 <body onload="load()">
     <div class="title" id="ver">
-        <img src="title.png">
+        <img src="title.png" alt="title">
     </div>
     <div class="main">
         <div class="input">
             <div class="box">
+               <!-- <label class="upload">
+                    <input type="file" id="upload" name="upload" accept=".png, .jpg, .jpeg, .gif"
+                        onchange="onFile(this)" aria-label="file" /> -->
+                </label>
                 <label>
-                    <p class="form">画像アドレス</p><input type="text" id="address">
+                    <p class="form">画像アドレス</p><input type="text" id="address" autocomplete="url" aria-label="aaa">
                     <a onclick="urlmsg()"><img src="question.png"></a>
                 </label>
                 <label>
@@ -63,14 +67,14 @@
                     <p class="form">自動コピー</p>
                     <div class="toggle_button">
                         <input id="autocopy" class="toggle_input" type='checkbox' checked="checked">
-                        <label for="toggle" class="toggle_label">
+                        <label for="autocopy" class="toggle_label"></label>
                     </div>
                 </label>
             </div>
             <div class="run">
                 <input type="submit" value="ジェネレート！" onclick="gencmd()">
             </div>
-            <textarea readonly id="generate"></textarea>
+            <textarea readonly id="generate" name="generate" aria-label="command"></textarea>
         </div>
     </div>
 </body>

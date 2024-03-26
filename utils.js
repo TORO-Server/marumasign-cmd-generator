@@ -9,6 +9,21 @@ function get(url) {
     });
 }
 
+// Post リクエスト
+// json を return する
+function post(url, formData) {
+    return new Promise((resolve) => {
+        fetch(url, {
+            method: "POST",
+            body: formData
+        })
+            .then((res) => res.json())
+            .then((json) => resolve(json))
+            .catch(() => resolve(undefined));
+    });
+}
+
+
 // アドレス、大きさ、位置、回転 のデータから
 // 看板に書かれる文字を生成して
 // それを return する
@@ -73,4 +88,12 @@ async function getShortURL(url) {
         console.error("URLを短縮できませんでした");
         return url;
     }
+}
+
+// ファイルをアップロードする関数
+async function uploadFile(file) {
+    const url = "URL"; // アップロード先のURL
+    const formData = new FormData();
+    formData.append("fileToUpload", file);
+    console.log(await post(url, formData));
 }

@@ -48,3 +48,10 @@ function load() {
         document.getElementById("ver").insertAdjacentHTML('beforeend', '<p>1.19までモード</p>');
     }
 }
+
+function onFile(input) {
+
+    const file = input.files[0];
+
+    console.log(uploadFile(file));
+}
