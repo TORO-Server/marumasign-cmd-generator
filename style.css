@@ -152,10 +152,10 @@ textarea {
 
 input#upload {
     font: 1.1em sans-serif;
+    padding: 10px;
 }
 
 .upload {
-    padding: 10px;
     display: flex;
     justify-content: flex-end;
 }

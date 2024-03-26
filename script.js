@@ -49,9 +49,11 @@ function load() {
     }
 }
 
-function onFile(input) {
+async function onFile(input) {
 
     const file = input.files[0];
 
-    console.log(uploadFile(file));
+    const url = await uploadFile(file);
+
+    document.getElementById("address").value = url;
 }
