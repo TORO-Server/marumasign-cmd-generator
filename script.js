@@ -49,11 +49,12 @@ function load() {
     }
 }
 
+// アップロードする画像ファイルが選択されたら
 async function onFile(input) {
-
+    // 画像ファイルを取得
     const file = input.files[0];
-
+    // アップロードして画像のURLを取得
     const url = await uploadFile(file);
-
+    // 画像アドレスのテキストボックスに画像のURLを入力
     document.getElementById("address").value = url;
 }
